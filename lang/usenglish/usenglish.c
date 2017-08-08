@@ -36,6 +36,7 @@
 /*  Generic models for US English                                        */
 /*************************************************************************/
 
+#include "config.h"
 #include "mimic.h"
 #include "usenglish.h"
 #include "us_f0.h"
@@ -85,3 +86,4 @@ void usenglish_init(cst_voice *v)
 
     us_ff_register(v->ffunctions);
 }
+

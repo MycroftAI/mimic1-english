@@ -63,6 +63,9 @@ extern const cst_cart us_durz_cart;
 extern const cst_cart us_pos_cart;
 extern const dur_stat * const us_dur_stats[];
 
+void usenglish_plugin_init();
+void usenglish_plugin_exit();
+
 #ifdef __cplusplus
 }  /* extern "C" */
 #endif /* __cplusplus */
