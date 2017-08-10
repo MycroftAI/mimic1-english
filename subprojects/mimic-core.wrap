@@ -1,0 +1,5 @@
+[wrap-git]
+directory=mimic-core
+url=https://github.com/zeehio/mimic-core.git
+revision=9b618e8f9c4c072bef29592703e44e2b71890860
+

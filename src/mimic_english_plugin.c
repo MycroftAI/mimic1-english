@@ -33,7 +33,7 @@
  * 
  */
 
-#include "config.h"
+#include "mimic_core_config.h"
 
 #include "usenglish.h"
 #include "cmu_lex.h"

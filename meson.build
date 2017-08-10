@@ -9,8 +9,6 @@ conf_data = configuration_data()
 build_as_plugin = get_option('plugin')
 message('Build mimic-english as plugin: @0@'.format(build_as_plugin))
 
-conf_data.set('ENABLE_LANG_ENGLISH_BUILTIN', build_as_plugin)
-
 cmulex_src = [
   'src/cmulex/cmu_lex.c',
   'src/cmulex/cmu_lex_data.c',
@@ -41,12 +39,29 @@ usenglish_src = [
 sources = usenglish_src + cmulex_src + ['src/mimic_english_plugin.c']
 
 
-includes = include_directories('include')
+includes = [include_directories('include')]
 
-mimiccore = dependency('ttsmimiccore')
+mimiccore = dependency('ttsmimiccore', required: false)
+if mimiccore.found()
+  mimic_plugin_dir = mimiccore.get_pkgconfig_variable('mimic_plugin_dir')
+else
+  # set up mimic-core using an external dependency
+  mimic_core_pr = subproject('mimic-core')
+  mimiccore = mimic_core_pr.get_variable('ttsmimiccore_dep')
+  mimic_plugin_dir = mimic_core_pr.get_variable('mimic_plugin_dir')
+  includes += include_directories('subprojects/mimic-core/')
+endif
+
+# If mimic-core does not have plugin support, disable the plugin
+if mimic_plugin_dir == ''
+    build_as_plugin = false
+endif
+
+conf_data.set('ENABLE_LANG_ENGLISH_BUILTIN', !build_as_plugin)
+
 
 if build_as_plugin
- lib_install_to = mimiccore.get_pkgconfig_variable('mimic_plugin_dir')
+ lib_install_to = mimic_plugin_dir
 else
  lib_install_to = join_paths(get_option('prefix'), get_option('libdir'))
 endif
