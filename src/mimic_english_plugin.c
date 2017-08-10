@@ -36,7 +36,7 @@
 #include "config.h"
 
 #include "usenglish.h"
-#include "lang/cmulex/cmu_lex.h"
+#include "cmu_lex.h"
 #include "mimic.h"
 void usenglish_plugin_init()
 {

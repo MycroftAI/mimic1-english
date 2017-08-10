@@ -1,0 +1,3 @@
+option('plugin', type : 'boolean', value : true,
+       description: 'Build mimic-english as a runtime plugin for mimic-core')
+
