@@ -34,7 +34,7 @@ sources = usenglish_src + cmulex_src
 includes = [include_directories('include')]
 
 # Core Dependency:
-mimiccore = dependency('ttsmimiccore')
+mimiccore = dependency('ttsmimic_core')
 mimic_plugin_dir = mimiccore.get_pkgconfig_variable('mimic_plugin_dir')
 
 # If mimic-core does not have plugin support, disable the plugin
@@ -113,9 +113,9 @@ install_headers(ttsmimic_headers, subdir : en_us_header_subdir)
 pkg = import('pkgconfig')
 
 pkg.generate(libraries : ttsmimic_english_lib,
-             name : 'ttsmimicenglish',
+             name : 'ttsmimic_english',
              subdirs: en_us_header_subdir,
-             requires: 'ttsmimiccore',
+             requires: 'ttsmimic_core',
              description: 'English support for text to speech synthesis in mimic.',
              version: meson.project_version())
 
