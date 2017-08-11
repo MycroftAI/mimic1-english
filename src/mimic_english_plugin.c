@@ -38,18 +38,6 @@
 #include "cmu_lex.h"
 #include "mimic.h"
 
-void usenglish_plugin_init()
-{
-   /* Several aliases for the same language */
-   mimic_add_lang("eng",usenglish_init,cmu_lex_init);
-   mimic_add_lang("usenglish",usenglish_init,cmu_lex_init);
-   mimic_add_lang("en_US",usenglish_init,cmu_lex_init); /* Recommended */
-}
-
-void usenglish_plugin_exit()
-{
-}
-
 #ifndef ENABLE_LANG_ENGLISH_BUILTIN
 #include "cst_plugins.h"
 mimic_plugin_t mimic_plugin = { "usenglish", 0, &usenglish_plugin_init, &usenglish_plugin_exit};

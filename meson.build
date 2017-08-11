@@ -1,7 +1,6 @@
 project('mimic-english', 'c', default_options : ['c_std=c99'], version: '0')
 
-build_as_plugin = get_option('plugin')
-message('Build mimic-english as plugin: @0@'.format(build_as_plugin))
+build_plugin = get_option('plugin')
 
 cmulex_src = [
   'src/cmulex/cmu_lex.c',
@@ -30,7 +29,7 @@ usenglish_src = [
   'src/usenglish/us_pos_cart.c',
   'src/usenglish/us_text.c']
 
-sources = usenglish_src + cmulex_src + ['src/mimic_english_plugin.c']
+sources = usenglish_src + cmulex_src
 
 includes = [include_directories('include')]
 
@@ -40,33 +39,44 @@ mimic_plugin_dir = mimiccore.get_pkgconfig_variable('mimic_plugin_dir')
 
 # If mimic-core does not have plugin support, disable the plugin
 if mimic_plugin_dir == ''
-    build_as_plugin = false
+    build_plugin = false
 endif
+message('Build mimic-english plugin: @0@'.format(build_plugin))
+
 
 en_us_header_subdir = join_paths('ttsmimic', 'lang', 'en_US')
 
 conf_data = configuration_data()
-conf_data.set('ENABLE_LANG_ENGLISH_BUILTIN', not build_as_plugin)
+conf_data.set('ENABLE_LANG_ENGLISH_BUILTIN', not build_plugin)
 
 mimic_english_config_h = configure_file(output : 'mimic_english_config.h',
                                         configuration : conf_data, install: true,
                                         install_dir : join_paths(get_option('includedir'), en_us_header_subdir))
 sources += [mimic_english_config_h]
 
-if build_as_plugin
- lib_install_to = mimic_plugin_dir
-else
- lib_install_to = join_paths(get_option('prefix'), get_option('libdir'))
-endif
-
 ttsmimic_english_lib = library('ttsmimic_english', sources,
                                include_directories : includes,
                                dependencies: mimiccore,
-                               install_dir: lib_install_to,
                                install: true)
 
 ttsmimiclib_english_dep = declare_dependency(link_with : ttsmimic_english_lib, 
                                              include_directories : includes)
+
+
+if build_plugin
+  ttsmimic_english_plugin_lib = library(
+    'ttsmimic_english_plugin',
+    ['src/mimic_english_plugin.c'],
+    include_directories : includes,
+    dependencies: [mimiccore, ttsmimiclib_english_dep],
+    install_dir: mimic_plugin_dir,
+    install: true)
+
+  ttsmimiclib_english_plugin_dep = declare_dependency(
+    link_with : ttsmimic_english_plugin_lib, 
+    include_directories : includes)
+endif
+
 
 
 ############ Headers #################
@@ -104,6 +114,7 @@ pkg = import('pkgconfig')
 
 pkg.generate(libraries : ttsmimic_english_lib,
              name : 'ttsmimicenglish',
+             subdirs: en_us_header_subdir,
              requires: 'ttsmimiccore',
              description: 'English support for text to speech synthesis in mimic.',
              version: meson.project_version())

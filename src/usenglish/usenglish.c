@@ -39,6 +39,7 @@
 #include "mimic_core_config.h"
 #include "mimic.h"
 #include "usenglish.h"
+#include "cmu_lex.h"
 #include "us_f0.h"
 #include "us_text.h"
 #include "us_ffeatures.h"
@@ -85,5 +86,17 @@ void usenglish_init(cst_voice *v)
     feat_set(v->features,"f0_model_func",uttfunc_val(&us_f0_model));
 
     us_ff_register(v->ffunctions);
+}
+
+void usenglish_plugin_init()
+{
+   /* Several aliases for the same language */
+   mimic_add_lang("eng",usenglish_init,cmu_lex_init);
+   mimic_add_lang("usenglish",usenglish_init,cmu_lex_init);
+   mimic_add_lang("en_US",usenglish_init,cmu_lex_init); /* Recommended */
+}
+
+void usenglish_plugin_exit()
+{
 }
 
