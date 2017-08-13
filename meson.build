@@ -40,7 +40,7 @@ if mimiccore.found()
 else
   # We compile it:
   mimic_core_sub = subproject('mimic-core')
-  mimiccore = mimic_core_sub.get_variable('ttsmimiccore_dep')
+  mimiccore = mimic_core_sub.get_variable('ttsmimic_core_dep')
   mimic_plugin_dir = mimic_core_sub.get_variable('mimic_plugin_dir')
 endif
 
