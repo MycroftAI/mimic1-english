@@ -1,0 +1,3 @@
+[submodule "subprojects/mimic-core"]
+	path = subprojects/mimic-core
+	url = https://github.com/zeehio/mimic-core.git
