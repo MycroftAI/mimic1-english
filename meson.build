@@ -66,8 +66,8 @@ ttsmimic_english_lib = library('ttsmimic_english', sources,
                                dependencies: mimiccore,
                                install: true)
 
-ttsmimiclib_english_dep = declare_dependency(link_with : ttsmimic_english_lib, 
-                                             include_directories : includes)
+ttsmimic_english_dep = declare_dependency(link_with : ttsmimic_english_lib, 
+                                          include_directories : includes)
 
 
 if build_plugin
@@ -75,11 +75,11 @@ if build_plugin
     'ttsmimic_english_plugin',
     ['src/mimic_english_plugin.c'],
     include_directories : includes,
-    dependencies: [mimiccore, ttsmimiclib_english_dep],
+    dependencies: [mimiccore, ttsmimic_english_dep],
     install_dir: mimic_plugin_dir,
     install: true)
 
-  ttsmimiclib_english_plugin_dep = declare_dependency(
+  ttsmimic_english_plugin_dep = declare_dependency(
     link_with : ttsmimic_english_plugin_lib, 
     include_directories : includes)
 endif
