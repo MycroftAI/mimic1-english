@@ -34,8 +34,15 @@ sources = usenglish_src + cmulex_src
 includes = [include_directories('include')]
 
 # Core Dependency:
-mimiccore = dependency('ttsmimic_core')
-mimic_plugin_dir = mimiccore.get_pkgconfig_variable('mimic_plugin_dir')
+mimiccore = dependency('ttsmimic_core', required: false)
+if mimiccore.found()
+  mimic_plugin_dir = mimiccore.get_pkgconfig_variable('mimic_plugin_dir')
+else
+  # We compile it:
+  mimic_core_sub = subproject('mimic-core')
+  mimiccore = mimic_core_sub.get_variable('ttsmimiccore_dep')
+  mimic_plugin_dir = mimic_core_sub.get_variable('mimic_plugin_dir')
+endif
 
 # If mimic-core does not have plugin support, disable the plugin
 if mimic_plugin_dir == ''
