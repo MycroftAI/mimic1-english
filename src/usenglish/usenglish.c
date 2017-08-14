@@ -36,7 +36,6 @@
 /*  Generic models for US English                                        */
 /*************************************************************************/
 
-#include "mimic_core_config.h"
 #include "mimic.h"
 #include "usenglish.h"
 #include "cmu_lex.h"
