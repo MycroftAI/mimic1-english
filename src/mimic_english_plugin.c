@@ -33,13 +33,9 @@
  * 
  */
 
-#include "mimic_english_config.h"
 #include "usenglish.h"
 #include "cmu_lex.h"
-#include "mimic.h"
-
-#ifndef ENABLE_LANG_ENGLISH_BUILTIN
 #include "cst_plugins.h"
+
 mimic_plugin_t mimic_plugin = { "usenglish", 0, &usenglish_plugin_init, &usenglish_plugin_exit};
-#endif
 

@@ -30,7 +30,7 @@ usenglish_src = [
 
 sources = usenglish_src + cmulex_src
 
-includes = [include_directories('include'), include_directories('.')]
+includes = [include_directories('include')]
 
 # Core Dependency:
 mimiccore = dependency('ttsmimic_core', required: false)
@@ -51,14 +51,6 @@ message('Build mimic-english plugin: @0@'.format(build_plugin))
 
 
 en_us_header_subdir = join_paths('ttsmimic', 'lang', 'en_US')
-
-conf_data = configuration_data()
-conf_data.set('ENABLE_LANG_ENGLISH_BUILTIN', not build_plugin)
-
-mimic_english_config_h = configure_file(output : 'mimic_english_config.h',
-                                        configuration : conf_data, install: true,
-                                        install_dir : join_paths(get_option('includedir'), en_us_header_subdir))
-sources += [mimic_english_config_h]
 
 ttsmimic_english_lib = library('ttsmimic_english', sources,
                                include_directories : includes,
