@@ -30,8 +30,6 @@ Files:
  src/usenglish/us_gpos.c
  src/usenglish/us_nums_cart.c
  src/usenglish/us_nums_cart.h
- src/usenglish/us_phrasing_cart.c
- src/usenglish/us_phrasing_cart.h
  src/usenglish/us_pos_cart.c
  src/usenglish/us_pos_cart.h
  src/usenglish/us_pos.tree

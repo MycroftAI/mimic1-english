@@ -56,7 +56,6 @@ void usenglish_init(cst_voice *v);
 /* Default functions and values that you might need. */
 cst_utterance *us_f0_model(cst_utterance *u);
 extern const cst_phoneset us_phoneset;
-extern const cst_cart us_phrasing_cart;
 extern const cst_cart us_int_accent_cart;
 extern const cst_cart us_int_tone_cart;
 extern const cst_cart us_durz_cart;

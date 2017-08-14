@@ -25,7 +25,6 @@ usenglish_src = [
   'src/usenglish/us_int_tone_cart.c',
   'src/usenglish/us_nums_cart.c',
   'src/usenglish/us_phoneset.c',
-  'src/usenglish/us_phrasing_cart.c',
   'src/usenglish/us_pos_cart.c',
   'src/usenglish/us_text.c']
 

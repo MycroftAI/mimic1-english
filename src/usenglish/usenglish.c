@@ -43,6 +43,7 @@
 #include "us_f0.h"
 #include "us_text.h"
 #include "us_ffeatures.h"
+#include "cst_synth.h"
 
 static const char * const us_english_punctuation = "\"'`.,:;!?(){}[]";
 static const char * const us_english_prepunctuation = "\"'`({[";
