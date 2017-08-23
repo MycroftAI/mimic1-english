@@ -11,7 +11,7 @@ american pronounciation dictionary).
 
 ### Mimic core:
 
-Install mimic-core from https://github.com/zeehio/mimic-core first.
+Install mimic-core from https://github.com/MycroftAI/mimic-core first.
 
 ### Meson and ninja
 
