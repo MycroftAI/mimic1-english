@@ -6,8 +6,6 @@ cmulex_src = [
   'src/cmulex/cmu_lex.c',
   'src/cmulex/cmu_lex_data.c',
   'src/cmulex/cmu_lex_entries.c',
-  'src/cmulex/cmu_lts_model.c',
-  'src/cmulex/cmu_lts_model.h',
   'src/cmulex/cmu_lts_rules.c',
   'src/cmulex/cmu_postlex.c']
 
@@ -94,7 +92,6 @@ install_headers(ttsmimic_headers, subdir : en_us_header_subdir)
 #               $(MIMICDIR)/tools/make_pos.scm 
 # src/cmulex/make_cmulex_helper.py
 #  'src/cmulex/make_cmulex',
-#  'src/cmulex/cmu_lts_model.h',
 #  'src/usenglish/us_pos.tree',
 #  'src/usenglish/us_regexes.h',
 #  'src/usenglish/us_ffeatures.h',
