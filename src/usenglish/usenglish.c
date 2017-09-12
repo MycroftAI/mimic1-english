@@ -93,7 +93,7 @@ void usenglish_plugin_init()
    /* Several aliases for the same language */
    mimic_add_lang("eng",usenglish_init,cmu_lex_init);
    mimic_add_lang("usenglish",usenglish_init,cmu_lex_init);
-   mimic_add_lang("en_US",usenglish_init,cmu_lex_init); /* Recommended */
+   mimic_add_lang("en",usenglish_init,cmu_lex_init); /* Recommended */
 }
 
 void usenglish_plugin_exit()
