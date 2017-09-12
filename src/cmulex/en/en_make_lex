@@ -30,4 +30,4 @@ export LEX_DEF_SCM="${SRCDIR}/cmulex.scm"
 export ALLOWABLES="${SRCDIR}/${LEX_LTS_PREFIX}_allowables.json"
 export PHONESET_SCM="${SRCDIR}/${LEX_LTS_PREFIX}_phoneset.scm"
 
-mimic_make_lex
+mimic_make_lex $@
