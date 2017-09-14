@@ -9,7 +9,7 @@ const int cmu_lex_num_bytes =
 #include "cmu_lex_num_bytes.c"
 ;
 
-const int cmu_lex_num_entries = 52994;
+const int cmu_lex_num_entries = 52866;
 
 const char * const cmu_lex_phone_table[57] = 
 {
@@ -39,10 +39,10 @@ const char * const cmu_lex_phone_table[57] =
     "uw1",
     "hh",
     "ae1",
+    "ow0",
     "iy0",
     "ih0",
     "ow1",
-    "ow0",
     "y",
     "zh",
     "w",
