@@ -87,7 +87,7 @@ static const char * const addenda27[] = { "p-",NULL};
 static const char * const addenda28[] = { "p<",NULL};
 static const char * const addenda29[] = { "p>",NULL};
 static const char * const addenda30[] = { "n_","ah1","n","d","er","s","k","ao1","r",NULL};
-static const char * const addenda31[] = { "s's","z",NULL};
+static const char * const addenda31[] = { "0's","z",NULL};
 static const char * const addenda32[] = { "nim","ay1","m",NULL};
 static const char * const addenda33[] = { "vdoesnt","d","ah1","z","n","t",NULL};
 static const char * const addenda34[] = { "vyoull","y","uw1","l",NULL};
@@ -330,10 +330,9 @@ int cmu_syl_boundary_mo(const cst_item *i,const cst_val *rest)
 
 cst_lexicon cmu_lex;
 cst_lts_rules cmu_lts_rules;
-extern const char * const cmu_lts_phone_table[];
-extern const char * const cmu_lts_letter_table[];
-extern const cst_lts_addr cmu_lts_letter_index[];
-extern const cst_lts_model cmu_lts_model[];
+extern const map_unicode_to_int cmu_lts_letter_index[];
+extern const cst_lts_rules cmu_lts_model[];
+extern const char *const cmu_lts_phone_table[];
 
 cst_lexicon *cmulex_init()
 {
@@ -350,25 +349,16 @@ cst_lexicon *cmu_lex_init()
         return &cmu_lex;  /* Already initialized */
 
     cmu_lts_rules.name = "cmu";
-    cmu_lts_rules.letter_index = cmu_lts_letter_index;
-#ifdef CST_NO_STATIC_LTS_MODEL
-    /* cmu_lts_rules.models will be set elsewhere */
-#else
-    cmu_lts_rules.models = cmu_lts_model;
-#endif
+    cmu_lts_rules.model = (cst_lts_rule*) cmu_lts_model;
     cmu_lts_rules.phone_table = cmu_lts_phone_table;
     cmu_lts_rules.context_window_size = 4;
     cmu_lts_rules.context_extra_feats = 1;
-    cmu_lts_rules.letter_table = 0 /* cmu_lts_letter_table */;
+    cmu_lts_rules.letter_index = (map_unicode_to_int*) cmu_lts_letter_index;
 
     cmu_lex.name = "cmu";
     cmu_lex.num_entries = cmu_lex_num_entries;
-#ifdef CST_NO_STATIC_LEX
-    /* cmu_lex.data will be set elsewhere */
-#else
     /* as the data is const, we cast it through void * */
     cmu_lex.data = (unsigned char *)(void *)cmu_lex_data;
-#endif
     cmu_lex.num_bytes = cmu_lex_num_bytes;
     cmu_lex.phone_table = (char **) cmu_lex_phone_table;
     cmu_lex.syl_boundary = cmu_syl_boundary_mo;

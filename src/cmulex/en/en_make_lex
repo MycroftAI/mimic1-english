@@ -1,0 +1,33 @@
+#!/bin/sh
+
+# Build cmudict.scm:
+# 1. Get the cmudict file from: https://github.com/rhdunn/amepd 
+# 2. Build and install the cmudict-tools from https://github.com/rhdunn/cmudict-tools
+# 3. Run:
+# cmudict-tools --format=festlex --output-context=festlex --remove-duplicate-contexts print cmudict > cmudict_with_comments.scm
+# sed -e 's/;.*//g' cmudict_with_comments.scm > cmudict.scm
+# sed -e 's/;.*//g' cmudict_with_comments.scm > cmudict_without_comments.scm
+# Remove the city of Nice, as the part of speech tagger is not good enough to disambiguate it from nice
+# sed -e 's/("nice" n (n iy1 s))//g' cmudict_without_comments.scm > cmudict.scm
+
+# We may get rid of the dependencies other than python) in the future
+# sudo apt install speech-tools festival
+export WAGON=`which wagon` # speech-tools binary
+export WFST_BUILD=`which wfst_build` # speech-tools binary
+export FESTIVAL=`which festival`
+export PYTHON3=`which python3`
+
+THISSCRIPT=`readlink -f "$0"`
+SRCDIR=`dirname $THISSCRIPT`
+
+
+export BUILDDIR="$PWD"
+
+export LEX_LTS_PREFIX="cmu"
+export LEX_INPUT="${SRCDIR}/cmudict.scm"
+export LEX_INPUT_FMT="--lexicon-fmt-flat"
+export LEX_DEF_SCM="${SRCDIR}/cmulex.scm"
+export ALLOWABLES="${SRCDIR}/${LEX_LTS_PREFIX}_allowables.json"
+export PHONESET_SCM="${SRCDIR}/${LEX_LTS_PREFIX}_phoneset.scm"
+
+mimic_make_lex $@

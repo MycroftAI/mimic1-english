@@ -1,3 +1,5 @@
 option('plugin', type : 'boolean', value : true,
        description: 'Build mimic-english as a runtime plugin for mimic-core')
+option('rebuild_lex_lts', type : 'boolean', value : false,
+       description: 'Rebuild lexicon and lts rules (requires pymimic, festival,...)')
 
